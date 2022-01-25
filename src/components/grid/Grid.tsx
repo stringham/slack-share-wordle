@@ -14,16 +14,18 @@ export const Grid = ({ guesses, isComplete, colorBlind }: Props) => {
     allGuesses.push('')
   }
 
+  const lastGuess = getLastGuess(guesses)
+
   const rows = isComplete
     ? guesses
         .slice(0, 6)
-        .map((guess, i, arr) =>
+        .map((guess, i) =>
           guess.length === 5 ? (
             <CompletedRow
               key={i}
               colorBlind={colorBlind}
               guess={guess}
-              finalGuess={getLastGuess(arr)}
+              finalGuess={lastGuess}
             />
           ) : (
             <CurrentRow key={i} guess={guess} />
