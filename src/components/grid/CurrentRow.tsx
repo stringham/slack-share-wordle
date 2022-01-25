@@ -11,10 +11,10 @@ export const CurrentRow = ({ guess }: Props) => {
   return (
     <div className="flex justify-center mb-1">
       {splitGuess.map((letter, i) => (
-        <Cell key={i} value={letter} />
+        <Cell colorBlind={false} key={i} value={letter} />
       ))}
       {emptyCells.map((_, i) => (
-        <Cell key={i} />
+        <Cell colorBlind={false} key={i} />
       ))}
     </div>
   )

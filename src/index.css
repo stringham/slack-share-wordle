@@ -20,3 +20,11 @@
     transform: scale(1);
   }
 }
+
+#color-blind:checked + label .switch-ball{
+    background-color: white;
+    transform: translateX(20px);
+}
+#color-blind + label .switch-ball {
+    transition: transform 0.2s linear;
+}
