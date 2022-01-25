@@ -1,4 +1,3 @@
-import { Cell } from '../grid/Cell'
 import { BaseModal } from './BaseModal'
 
 type Props = {
@@ -15,7 +14,7 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
       </p>
 
       <div className="place-content-center flex mt-4">
-        <img src="slackshare.png" />
+        <img alt="slack share preview" src="slackshare.png" />
       </div>
       <p className="text-sm text-gray-500 mt-4">
         Easily upload all the slack emoji to your slack instance using this <a className="underline font-bold" href="https://chrome.google.com/webstore/detail/neutral-face-emoji-tools/anchoacphlfbdomdlomnbbfhcmcdmjej">bulk emoji upload extension</a>.

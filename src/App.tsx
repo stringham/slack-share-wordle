@@ -68,11 +68,12 @@ function App() {
                 case 'correct': return `:wordle-${letter.toLowerCase()}-green:`;
                 case 'present': return `:wordle-${letter.toLowerCase()}-yellow:`;
             }
+            return '';
         }).join('')
     }).join('\n');
 
     const guessCount = guesses.filter(g => g.length > 0).length;
-    const guessCountText = guessCount < 6 ? `${guessCount}/6` : 'X/6'
+    const guessCountText = guessCount <= 6 ? `${guessCount}/6` : 'X/6'
 
     const text = `Wordle ${index} ${guessCountText}\n\n${emojiGrid}`;
 
