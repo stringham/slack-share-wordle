@@ -4,7 +4,7 @@ import { Alert } from './components/alerts/Alert'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
 import { InfoModal } from './components/modals/InfoModal'
-import { getStatuses } from './lib/statuses'
+import { getGuessStatuses, getLastGuess, getStatuses } from './lib/statuses'
 
 function App() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
@@ -53,23 +53,21 @@ function App() {
   }
 
   const copyShareText = () => {
-
-  const epochMs = new Date('06/19/2021').getTime()
-  const now = Date.now()
-  const msInDay = 86400000
-  const index = Math.floor((now - epochMs) / msInDay)
-    const statuses = getStatuses(guesses);
+    const epochMs = new Date('06/19/2021').getTime()
+    const now = Date.now()
+    const msInDay = 86400000
+    const index = Math.floor((now - epochMs) / msInDay)
+    const finalGuess = getLastGuess(guesses);
     const emojiGrid = guesses.filter((guess, i) => guess.length > 0 && i < 6).map(guess => {
-        return guess.split('').map(letter => {
-            const status = statuses[letter] ?? 'absent';
-
-            switch(status) {
-                case 'absent': return `:wordle-${letter.toLowerCase()}-gray:`;
-                case 'correct': return `:wordle-${letter.toLowerCase()}-green:`;
-                case 'present': return `:wordle-${letter.toLowerCase()}-yellow:`;
-            }
-            return '';
-        }).join('')
+    const statuses = getGuessStatuses(guess, finalGuess)
+      return statuses.map((status, i) => {
+        switch(status) {
+          case 'absent': return `:wordle-${guess[i].toLowerCase()}-gray:`;
+          case 'correct': return `:wordle-${guess[i].toLowerCase()}-green:`;
+          case 'present': return `:wordle-${guess[i].toLowerCase()}-yellow:`;
+        }
+        return '';
+      }).join('')
     }).join('\n');
 
     const guessCount = guesses.filter(g => g.length > 0).length;
