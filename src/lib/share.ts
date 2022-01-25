@@ -1,7 +1,7 @@
 import { getGuessStatuses } from './statuses'
-import { solutionIndex } from './words'
 
 export const shareStatus = (guesses: string[]) => {
+    const solutionIndex = 1;
   navigator.clipboard.writeText(
     'Wordle ' +
       solutionIndex +
@@ -15,7 +15,7 @@ export const shareStatus = (guesses: string[]) => {
 export const generateEmojiGrid = (guesses: string[]) => {
   return guesses
     .map((guess) => {
-      const status = getGuessStatuses(guess)
+      const status = getGuessStatuses(guess, guesses[guesses.length-1])
       return guess
         .split('')
         .map((letter, i) => {

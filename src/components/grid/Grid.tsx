@@ -1,25 +1,24 @@
+import { getLastGuess } from '../../lib/statuses';
 import { CompletedRow } from './CompletedRow'
 import { CurrentRow } from './CurrentRow'
-import { EmptyRow } from './EmptyRow'
 
 type Props = {
   guesses: string[]
-  currentGuess: string
+  isComplete: boolean
 }
 
-export const Grid = ({ guesses, currentGuess }: Props) => {
-  const empties =
-    guesses.length < 5 ? Array.from(Array(5 - guesses.length)) : []
+export const Grid = ({ guesses, isComplete}: Props) => {
+  const allGuesses = guesses.slice();
+  while(allGuesses.length < 7) {
+      allGuesses.push('')
+  }
 
+  const rows = isComplete ? guesses.filter(guess => guess.length === 5).map((guess, i, arr) => (
+      <CompletedRow key={i} guess={guess} finalGuess={getLastGuess(arr)} />
+  )) : allGuesses.map((guess, i) => (<CurrentRow key={i} guess={guess} />))
   return (
     <div className="pb-6">
-      {guesses.map((guess, i) => (
-        <CompletedRow key={i} guess={guess} />
-      ))}
-      {guesses.length < 6 && <CurrentRow guess={currentGuess} />}
-      {empties.map((_, i) => (
-        <EmptyRow key={i} />
-      ))}
+      {rows}
     </div>
   )
 }

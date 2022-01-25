@@ -1,5 +1,3 @@
-import { solution } from './words'
-
 export type CharStatus = 'absent' | 'present' | 'correct'
 
 export type CharValue =
@@ -28,12 +26,22 @@ export type CharValue =
   | 'V'
   | 'B'
   | 'N'
-  | 'M'
+  | 'M';
+
+  export const getLastGuess = (guesses: string[]) => {
+      for(let i=guesses.length-1; i>=0; i--) {
+          if(guesses[i].length > 0) {
+              return guesses[i];
+          }
+      }
+      return '';
+  }
 
 export const getStatuses = (
-  guesses: string[]
+  guesses: string[],
 ): { [key: string]: CharStatus } => {
   const charObj: { [key: string]: CharStatus } = {}
+  const solution = getLastGuess(guesses);
 
   guesses.forEach((word) => {
     word.split('').forEach((letter, i) => {
@@ -57,7 +65,7 @@ export const getStatuses = (
   return charObj
 }
 
-export const getGuessStatuses = (guess: string): CharStatus[] => {
+export const getGuessStatuses = (guess: string, solution: string): CharStatus[] => {
   const splitSolution = solution.split('')
   const splitGuess = guess.split('')
 
