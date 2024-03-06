@@ -1,6 +1,6 @@
 # Share Wordle in Slack
 
-- Go play the real Wordle [here](https://www.powerlanguage.co.uk/wordle/)
+- Go play the real Wordle [here](https://www.nytimes.com/games/wordle/index.html)
 - Use this project [here](https://stringham.me/share-wordle)
 
 This is a fork of [hannahcode's Wordle Clone](https://github.com/hannahcode/wordle) that I simplified to be able to enter your wordle grid and share it.
